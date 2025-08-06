@@ -30,19 +30,24 @@ function App() {
     time: string;
   }) => {
     setColaboradores([...colaboradores, colaborador]);
-    console.log(colaboradores);
   };
 
   return (
     <>
       <Banner />
-      <Formulario aoColaboradorCadastrado={aoColaboradorCadastrado} />
+      <Formulario
+        times={times.map((time) => time.nome)}
+        aoColaboradorCadastrado={aoColaboradorCadastrado}
+      />
 
       {times.map((time) => (
         <Time
           nome={time.nome}
           corPrimaria={time.corPrimaria}
           corSecundaria={time.corSecundaria}
+          colaboradores={colaboradores.filter(
+            (colaborador) => colaborador.time === time.nome
+          )}
         />
       ))}
     </>

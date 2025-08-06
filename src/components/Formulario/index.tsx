@@ -11,6 +11,7 @@ interface FormularioProps {
     imagem: string;
     time: string;
   }) => void;
+  times: string[];
 }
 
 export const Formulario = (props: FormularioProps) => {
@@ -27,6 +28,10 @@ export const Formulario = (props: FormularioProps) => {
       imagem,
       time,
     });
+    setNome("");
+    setCargo("");
+    setImagem("");
+    setTime("");
   };
 
   return (
@@ -55,6 +60,7 @@ export const Formulario = (props: FormularioProps) => {
           obrigatorio={true}
           label="Times"
           aoAlterado={(valor) => setTime(valor)}
+          times={props.times}
         />
         <Botao children="Criar card" />
       </form>

@@ -1,7 +1,7 @@
 import "./ListaSuspensa.css";
 
 type ListaSuspensaProps = {
-  times?: { nome: string; corPrimaria: string; corSecundaria: string }[];
+  times?: string[];
   aoAlterado(value: string): void;
   label: string;
   obrigatorio: boolean;
@@ -19,7 +19,7 @@ const ListaSuspensa = (props: ListaSuspensaProps) => {
         onChange={(evento) => props.aoAlterado(evento.target.value)}
       >
         {times.map((item, index) => (
-          <option key={index}>{item.nome}</option>
+          <option key={index}>{item}</option>
         ))}
       </select>
     </div>

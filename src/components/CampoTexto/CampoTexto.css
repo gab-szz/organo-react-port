@@ -12,7 +12,14 @@
   padding: 8px;
   font-size: 24px;
   padding: 12px;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
-  border: none;
+  box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ccc;
   width: 92%;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* Quando o select estiver focado (clicado) */
+.campo-texto input:focus {
+  border-color: #3182ce; /* azul chakra: blue.600 */
 }

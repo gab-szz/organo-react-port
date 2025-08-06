@@ -4,6 +4,7 @@ export type CampoTextoProps = {
   label: string;
   placeholder: string;
   obrigatorio?: boolean;
+  valor?: string;
   aoAlterado: (valor: string) => void;
 };
 
@@ -24,6 +25,7 @@ const CampoTexto = (props: CampoTextoProps) => {
         required={props.obrigatorio}
         placeholder={placeholderMod}
         onChange={aoDigitar}
+        value={props.valor || ""}
       />
     </div>
   );

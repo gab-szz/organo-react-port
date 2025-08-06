@@ -4,12 +4,14 @@ interface ColaboradorProps {
   nome: string;
   cargo: string;
   imagem: string;
+  corDeFundo: string;
 }
 
 const Colaborador = (props: ColaboradorProps) => {
+  console.log(props);
   return (
     <div className="colaborador">
-      <div className="cabecalho">
+      <div className="cabecalho" style={{ backgroundColor: props.corDeFundo }}>
         <img src={props.imagem} alt="Colaborador" />
       </div>
       <div className="rodape">

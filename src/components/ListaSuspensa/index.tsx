@@ -5,6 +5,7 @@ type ListaSuspensaProps = {
   aoAlterado(value: string): void;
   label: string;
   obrigatorio: boolean;
+  valor?: string;
 };
 
 const ListaSuspensa = (props: ListaSuspensaProps) => {
@@ -17,7 +18,11 @@ const ListaSuspensa = (props: ListaSuspensaProps) => {
         name=""
         id=""
         onChange={(evento) => props.aoAlterado(evento.target.value)}
+        value={props.valor ?? ""}
       >
+        <option value="" disabled>
+          Selecione um time
+        </option>
         {times.map((item, index) => (
           <option key={index}>{item}</option>
         ))}

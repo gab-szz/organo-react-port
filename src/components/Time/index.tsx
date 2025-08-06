@@ -23,6 +23,8 @@ const Time = (props: TimeProps) => {
         <h3 style={{ borderColor: props.corPrimaria }}>{props.nome}</h3>
         {props.colaboradores.map((colaborador) => (
           <Colaborador
+            key={colaborador.nome}
+            corDeFundo={props.corPrimaria}
             nome={colaborador.nome}
             cargo={colaborador.cargo}
             imagem={colaborador.imagem}

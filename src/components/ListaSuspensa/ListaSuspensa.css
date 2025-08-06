@@ -12,7 +12,14 @@
   padding: 8px;
   font-size: 24px;
   padding: 12px;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
-  border: none;
+  box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ccc;
+  border-radius: px;
   width: 97%;
+  outline: none; /* remove a borda preta padrão do navegador */
+}
+
+/* Quando o select estiver focado (clicado) */
+.lista-suspensa select:focus {
+  border-color: #3182ce; /* azul chakra: blue.600 */
 }

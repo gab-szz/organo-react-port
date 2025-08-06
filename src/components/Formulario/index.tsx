@@ -4,7 +4,16 @@ import CampoTexto from "../CampoTexto";
 import ListaSuspensa from "../ListaSuspensa";
 import "./Formulario.css";
 
-export const Formulario = () => {
+interface FormularioProps {
+  aoColaboradorCadastrado: (colaborador: {
+    nome: string;
+    cargo: string;
+    imagem: string;
+    time: string;
+  }) => void;
+}
+
+export const Formulario = (props: FormularioProps) => {
   const [nome, setNome] = useState<string>("");
   const [cargo, setCargo] = useState<string>("");
   const [imagem, setImagem] = useState<string>("");
@@ -12,9 +21,12 @@ export const Formulario = () => {
 
   const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
-    console.log(
-      `Nome: ${nome}, Cargo: ${cargo}, Imagem: ${imagem}, Time: ${time} `
-    );
+    props.aoColaboradorCadastrado({
+      nome,
+      cargo,
+      imagem,
+      time,
+    });
   };
 
   return (

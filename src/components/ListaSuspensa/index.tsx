@@ -1,24 +1,14 @@
 import "./ListaSuspensa.css";
 
 type ListaSuspensaProps = {
+  times?: { nome: string; corPrimaria: string; corSecundaria: string }[];
   aoAlterado(value: string): void;
   label: string;
   obrigatorio: boolean;
 };
 
 const ListaSuspensa = (props: ListaSuspensaProps) => {
-  const times = [
-    "Inovação e Gestão",
-    "DevOps",
-    "Front-End",
-    "Back-End",
-    "Mobile",
-    "Data Science",
-    "UX/UI",
-    "Marketing",
-    "Vendas",
-  ];
-
+  const times = props.times ?? [];
   return (
     <div className="lista-suspensa">
       <label>{props.label}</label>
@@ -29,7 +19,7 @@ const ListaSuspensa = (props: ListaSuspensaProps) => {
         onChange={(evento) => props.aoAlterado(evento.target.value)}
       >
         {times.map((item, index) => (
-          <option key={index}>{item}</option>
+          <option key={index}>{item.nome}</option>
         ))}
       </select>
     </div>

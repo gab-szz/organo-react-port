@@ -3,6 +3,7 @@ import "./Time.css";
 
 interface TimeProps {
   colaboradores: {
+    indice?: number;
     nome: string;
     cargo: string;
     imagem: string;
@@ -11,6 +12,7 @@ interface TimeProps {
   nome: string;
   corSecundaria: string;
   corPrimaria: string;
+  aoDeletar: () => void;
 }
 
 const Time = (props: TimeProps) => {
@@ -21,15 +23,20 @@ const Time = (props: TimeProps) => {
         style={{ backgroundColor: props.corSecundaria }}
       >
         <h3 style={{ borderColor: props.corPrimaria }}>{props.nome}</h3>
-        {props.colaboradores.map((colaborador) => (
-          <Colaborador
-            key={colaborador.nome}
-            corDeFundo={props.corPrimaria}
-            nome={colaborador.nome}
-            cargo={colaborador.cargo}
-            imagem={colaborador.imagem}
-          />
-        ))}
+        <div>
+          {props.colaboradores.map((colaborador, indice) => {
+            return (
+              <Colaborador
+                key={indice}
+                corDeFundo={props.corPrimaria}
+                nome={colaborador.nome}
+                cargo={colaborador.cargo}
+                imagem={colaborador.imagem}
+                aoDeletar={props.aoDeletar}
+              />
+            );
+          })}
+        </div>
       </section>
     )
   );

@@ -32,6 +32,10 @@ function App() {
     setColaboradores([...colaboradores, colaborador]);
   };
 
+  function deletarColaborador() {
+    console.log("Deletar colaborador com ID");
+  }
+
   return (
     <>
       <Banner />
@@ -49,6 +53,7 @@ function App() {
           colaboradores={colaboradores.filter(
             (colaborador) => colaborador.time === time.nome
           )}
+          aoDeletar={() => deletarColaborador()}
         />
       ))}
     </>

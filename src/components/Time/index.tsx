@@ -3,12 +3,14 @@ import "./Time.css";
 import hexToRgba from "hex-to-rgba";
 
 interface TimeProps {
+  aoFavoritar: (id: string) => unknown;
   colaboradores: {
     id: string;
     indice?: number;
     nome: string;
     cargo: string;
     imagem: string;
+    favorito: boolean;
     time: string;
   }[];
   nome: string;
@@ -42,7 +44,9 @@ const Time = (props: TimeProps) => {
                 nome={colaborador.nome}
                 cargo={colaborador.cargo}
                 imagem={colaborador.imagem}
+                favorito={colaborador.favorito}
                 aoDeletar={props.aoDeletar}
+                aoFavoritar={props.aoFavoritar}
               />
             );
           })}

@@ -21,13 +21,21 @@ function App() {
   ]);
 
   const [colaboradores, setColaboradores] = useState<
-    { id: string; nome: string; cargo: string; imagem: string; time: string }[]
+    {
+      id: string;
+      nome: string;
+      cargo: string;
+      imagem: string;
+      favorito: boolean;
+      time: string;
+    }[]
   >([
     {
       id: uuidv4(),
       nome: "Gabriel",
       cargo: "Desenvolvedor",
       imagem: "https://github.com/gab-szz.png",
+      favorito: false,
       time: "Front-End", // ou outro nome de time existente
     },
   ]);
@@ -38,7 +46,10 @@ function App() {
     imagem: string;
     time: string;
   }) => {
-    setColaboradores([...colaboradores, { ...colaborador, id: uuidv4() }]);
+    setColaboradores([
+      ...colaboradores,
+      { ...colaborador, id: uuidv4(), favorito: false },
+    ]);
   };
 
   function deletarColaborador(id: string) {
@@ -62,6 +73,17 @@ function App() {
     setTimes([...times, { ...novoTime, id: uuidv4() }]);
   }
 
+  function resolverFavorito(id: string) {
+    setColaboradores(
+      colaboradores.map((colaborador) => {
+        if (colaborador.id === id) {
+          return { ...colaborador, favorito: !colaborador.favorito };
+        }
+        return colaborador;
+      })
+    );
+  }
+
   return (
     <>
       <Banner />
@@ -82,6 +104,7 @@ function App() {
             (colaborador) => colaborador.time === time.nome
           )}
           aoDeletar={() => deletarColaborador(time.id)}
+          aoFavoritar={resolverFavorito}
         />
       ))}
     </>

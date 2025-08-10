@@ -17,3 +17,9 @@
   justify-content: space-around;
   flex-wrap: 32px;
 }
+
+input.cor {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}

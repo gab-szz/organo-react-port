@@ -4,6 +4,7 @@ import hexToRgba from "hex-to-rgba";
 
 interface TimeProps {
   colaboradores: {
+    id: string;
     indice?: number;
     nome: string;
     cargo: string;
@@ -12,8 +13,9 @@ interface TimeProps {
   }[];
   nome: string;
   cor: string;
+  id: string;
   aoDeletar: () => void;
-  mudarCor: (cor: string, nome: string) => void;
+  mudarCor: (cor: string, id: string) => void;
 }
 
 const Time = (props: TimeProps) => {
@@ -25,7 +27,7 @@ const Time = (props: TimeProps) => {
       >
         <input
           value={props.cor}
-          onChange={(evento) => props.mudarCor(evento.target.value, props.nome)}
+          onChange={(evento) => props.mudarCor(evento.target.value, props.id)}
           type="color"
           className="input-cor"
         />
@@ -35,6 +37,7 @@ const Time = (props: TimeProps) => {
             return (
               <Colaborador
                 key={indice}
+                id={colaborador.id}
                 corDeFundo={props.cor}
                 nome={colaborador.nome}
                 cargo={colaborador.cargo}

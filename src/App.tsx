@@ -2,25 +2,35 @@ import { useState } from "react";
 import Banner from "./components/Banner";
 import { Formulario } from "./components/Formulario";
 import Time from "./components/Time";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [times, setTimes] = useState([
     {
+      id: uuidv4(),
       nome: "Inovação e Gestão",
       cor: "#e3f2fd",
     }, // Azul forte e leve
-    { nome: "Front-End", cor: "#e8f5e9" }, // Verde forte e leve
-    { nome: "Back-End", cor: "#efebe9" }, // Marrom forte e leve
-    { nome: "Mobile", cor: "#fffde7" }, // Amarelo forte e leve
-    { nome: "Data Science", cor: "#e1f5fe" }, // Azul forte e leve
-    { nome: "UX/UI", cor: "#fce4ec" }, // Rosa forte e leve
-    { nome: "Marketing", cor: "#f3e5f5" }, // Roxo forte e leve
-    { nome: "Vendas", cor: "#fff3e0" }, // Laranja forte e leve
+    { id: uuidv4(), nome: "Front-End", cor: "#e8f5e9" }, // Verde forte e leve
+    { id: uuidv4(), nome: "Back-End", cor: "#efebe9" }, // Marrom forte e leve
+    { id: uuidv4(), nome: "Mobile", cor: "#fffde7" }, // Amarelo forte e leve
+    { id: uuidv4(), nome: "Data Science", cor: "#e1f5fe" }, // Azul forte e leve
+    { id: uuidv4(), nome: "UX/UI", cor: "#fce4ec" }, // Rosa forte e leve
+    { id: uuidv4(), nome: "Marketing", cor: "#f3e5f5" }, // Roxo forte e leve
+    { id: uuidv4(), nome: "Vendas", cor: "#fff3e0" }, // Laranja forte e leve
   ]);
 
   const [colaboradores, setColaboradores] = useState<
-    { nome: string; cargo: string; imagem: string; time: string }[]
-  >([]);
+    { id: string; nome: string; cargo: string; imagem: string; time: string }[]
+  >([
+    {
+      id: uuidv4(),
+      nome: "Gabriel",
+      cargo: "Desenvolvedor",
+      imagem: "https://github.com/gab-szz.png",
+      time: "Front-End", // ou outro nome de time existente
+    },
+  ]);
 
   const aoColaboradorCadastrado = (colaborador: {
     nome: string;
@@ -28,17 +38,19 @@ function App() {
     imagem: string;
     time: string;
   }) => {
-    setColaboradores([...colaboradores, colaborador]);
+    setColaboradores([...colaboradores, { ...colaborador, id: uuidv4() }]);
   };
 
-  function deletarColaborador() {
-    console.log("Deletar colaborador com ID");
+  function deletarColaborador(id: string) {
+    setColaboradores(
+      colaboradores.filter((colaborador) => colaborador.id !== id)
+    );
   }
 
-  function mudarCorDoTime(cor: string, timeNome: string) {
+  function mudarCorDoTime(cor: string, id: string) {
     setTimes(
       times.map((time) => {
-        if (time.nome === timeNome) {
+        if (time.id === id) {
           time.cor = cor;
         }
         return time;
@@ -58,12 +70,13 @@ function App() {
         <Time
           key={time.nome}
           nome={time.nome}
+          id={time.id}
           cor={time.cor}
           mudarCor={mudarCorDoTime}
           colaboradores={colaboradores.filter(
             (colaborador) => colaborador.time === time.nome
           )}
-          aoDeletar={() => deletarColaborador()}
+          aoDeletar={() => deletarColaborador(time.id)}
         />
       ))}
     </>

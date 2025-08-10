@@ -1,6 +1,7 @@
-import "./CampoTexto.css";
+import "./Campo.css";
 
-export type CampoTextoProps = {
+export type CampoProps = {
+  type?: string;
   label: string;
   placeholder: string;
   obrigatorio?: boolean;
@@ -8,7 +9,7 @@ export type CampoTextoProps = {
   aoAlterado: (valor: string) => void;
 };
 
-const CampoTexto = (props: CampoTextoProps) => {
+const Campo = (props: CampoProps) => {
   const placeholderMod = `${props.placeholder}...`;
 
   const aoDigitar = (evento: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,10 +17,10 @@ const CampoTexto = (props: CampoTextoProps) => {
   };
 
   return (
-    <div className="campo-texto">
+    <div className={`campo campo-${props.type}`}>
       <label>{props.label}</label>
       <input
-        type="text"
+        type={props.type || "text"}
         id="campo-texto"
         name="campo-texto"
         required={props.obrigatorio}
@@ -31,4 +32,4 @@ const CampoTexto = (props: CampoTextoProps) => {
   );
 };
 
-export default CampoTexto;
+export default Campo;

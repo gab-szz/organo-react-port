@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Botao from "../Botao";
-import CampoTexto from "../CampoTexto";
+import Campo from "../Campo";
 import ListaSuspensa from "../ListaSuspensa";
 import "./Formulario.css";
 
@@ -12,6 +12,7 @@ interface FormularioProps {
     time: string;
   }) => void;
   times: string[];
+  cadastrarTime: (time: { nome: string; cor: string }) => void;
 }
 
 export const Formulario = (props: FormularioProps) => {
@@ -19,6 +20,8 @@ export const Formulario = (props: FormularioProps) => {
   const [cargo, setCargo] = useState<string>("");
   const [imagem, setImagem] = useState<string>("");
   const [time, setTime] = useState<string>("");
+  const [nomeTime, setNomeTime] = useState<string>("");
+  const [corTime, setCorTime] = useState<string>("");
 
   const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
@@ -40,21 +43,21 @@ export const Formulario = (props: FormularioProps) => {
         <h2 className="formulario-titulo">
           Preencha os dados para criar o card do colaborador
         </h2>
-        <CampoTexto
+        <Campo
           obrigatorio={true}
           label="Nome"
           placeholder="Digite seu nome"
           aoAlterado={(valor) => setNome(valor)}
           valor={nome}
         />
-        <CampoTexto
+        <Campo
           obrigatorio={true}
           label="Cargo"
           placeholder="Digite seu cargo"
           aoAlterado={(valor) => setCargo(valor)}
           valor={cargo}
         />
-        <CampoTexto
+        <Campo
           obrigatorio={true}
           label="Imagem"
           placeholder="Digite o caminho da imagem"
@@ -70,6 +73,34 @@ export const Formulario = (props: FormularioProps) => {
         />
         <div className="formulario-botao">
           <Botao children="Criar card" />
+        </div>
+      </form>
+      <form
+        onSubmit={(evento) => {
+          evento.preventDefault();
+          props.cadastrarTime({ nome: nomeTime, cor: corTime });
+        }}
+      >
+        <h2 className="formulario-titulo">
+          Preencha os dados para criar um novo time
+        </h2>
+        <Campo
+          obrigatorio
+          label="Nome"
+          placeholder="Digite o nome do time"
+          aoAlterado={(valor) => setNomeTime(valor)}
+          valor={nomeTime}
+        />
+        <Campo
+          obrigatorio
+          type="color"
+          label="Cor"
+          placeholder="Digite a cor do time"
+          aoAlterado={(valor) => setCorTime(valor)}
+          valor={corTime}
+        />
+        <div className="formulario-botao">
+          <Botao children="Criar um novo time" />
         </div>
       </form>
     </section>
